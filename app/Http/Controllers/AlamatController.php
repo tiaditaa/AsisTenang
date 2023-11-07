@@ -17,31 +17,28 @@ class AlamatController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'nama_alamat' => 'required',
-            'provinsi' => 'required',
-            'kota' => 'required',
-            'kecamatan' => 'required',
-            'kode_pos' => 'required',
-            'alamat_lengkap' => 'required',
-        ]);
+        if ($request->isMethod('post')) {
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 400);
+            $this->validate($request, [
+                'nama_alamat' => 'required',
+                'provinsi' => 'required',
+                'kota' => 'required',
+                'kecamatan' => 'required',
+                'kode_pos' => 'required',
+                'alamat_lengkap' => 'required',
+            ]);
+
+            Alamat::create([
+                'nama_alamat' => $request->nama_alamat,
+                'provinsi' => $request->provinsi,
+                'kota' => $request->kota,
+                'kecamatan' => $request->kecamatan,
+                'kode_pos' => $request->kode_pos,
+                'alamat_lengkap' => $request->alamat_lengkap,
+            ]);
+            return redirect()->route('akun.add')->with('status', 'Data telah tersimpan di database');
         }
-
-        $alamat = new Alamat([
-            'nama_alamat' => $request->input('nama_alamat'),
-            'provinsi' => $request->input('provinsi'),
-            'kota' => $request->input('kota'),
-            'kecamatan' => $request->input('kecamatan'),
-            'kode_pos' => $request->input('kode_pos'),
-            'alamat_lengkap' => $request->input('alamat_lengkap'),
-        ]);
-
-        $alamat->save();
-
-        return response()->json(['message' => 'Data alamat berhasil disimpan'], 201);
+        return view('page.admin.pelanggan.addAlamat');
     }
 
     public function getData()

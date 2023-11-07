@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AkunController;
+use App\Http\Controllers\AlamatController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -39,5 +40,12 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::match(['get','post'],'tambah', 'tambahAkun')->name('add');
             Route::match(['get','post'],'{id}/ubah', 'ubahAkun')->name('edit');
             Route::delete('{id}/hapus', 'hapusAkun')->name('delete');
+        });
+
+    Route::controller(AlamatController::class)
+        ->prefix('alamat')
+        ->as('alamat.')
+        ->group(function () {
+            Route::match(['get','post'],'tambah', 'store')->name('add');
         });
 });

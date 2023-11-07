@@ -22,6 +22,23 @@ $links = [
                 "section_href" => route('akun.add')
             ]
         ]
+    ],
+    [
+        "text" => "Kelola Alamat",
+        "icon" => "fas fa-users",
+        "is_multi" => true,
+        "href" => [
+            [
+                "section_text" => "Data Alamat",
+                "section_icon" => "far fa-circle",
+                "section_href" => route('akun.index')
+            ],
+            [
+                "section_text" => "Tambah Alamat",
+                "section_icon" => "far fa-circle",
+                "section_href" => route('alamat.add')
+            ]
+        ]
     ]
 ];
 $navigation_links = json_decode(json_encode($links));
