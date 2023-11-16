@@ -2,7 +2,7 @@
 <div class="register-box">
     <div class="register-logo">
         <a href="#">
-            <b>Admin</b>LTE</a>
+            <b>Asis</b>Tenang</a>
     </div>
 
     <div class="card">
