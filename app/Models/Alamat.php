@@ -12,8 +12,8 @@ class Alamat extends Model
     protected $fillable = ['nama_alamat', 'provinsi', 'kota', 'kecamatan', 'kode_pos', 'alamat_lengkap'];
     protected $table = 'alamat';
 
-    public function Alamat()
-    {
-        $this->hasMany(Alamat::class, 'nama_alamat', 'provinsi', 'kota', 'kecamatan', 'kode_pos', 'alamat_lengkap');
-    }
+    // public function Alamat()
+    // {
+    //     $this->hasMany(Alamat::class, 'nama_alamat', 'provinsi', 'kota', 'kecamatan', 'kode_pos', 'alamat_lengkap');
+    // }
 }
