@@ -15,49 +15,43 @@ class AsistenController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function tambahAsisten(Request $request)
     {
         if ($request->isMethod('post')) {
 
             $this->validate($request, [
-                'nama_alamat' => 'required',
-                'provinsi' => 'required',
-                'kota' => 'required',
-                'kecamatan' => 'required',
-                'kode_pos' => 'required',
-                'alamat_lengkap' => 'required',
+                'nama_asisten' => 'required',
+                'layanan' => 'required',
+                'jenis_kelamin' => 'required',
+                'ketersediaan' => 'required',
             ]);
 
             Asisten::create([
-                'nama_alamat' => $request->nama_alamat,
-                'provinsi' => $request->provinsi,
-                'kota' => $request->kota,
-                'kecamatan' => $request->kecamatan,
-                'kode_pos' => $request->kode_pos,
-                'alamat_lengkap' => $request->alamat_lengkap,
+                'nama_asisten' => $request->nama_asisten,
+                'layanan' => $request->layanan,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'ketersediaan' => $request->ketersediaan,
             ]);
-            return redirect()->route('akun.add')->with('status', 'Data telah tersimpan di database');
+            return redirect()->route('asisten.add')->with('status', 'Data telah tersimpan di database');
         }
-        return view('page.admin.pelanggan.addAlamat');
+        return view('page.admin.akun.addAsisten');
     }
 
     public function getData()
     {
-        $alamat = Asisten::all();
+        $asisten = Asisten::all();
 
-        $dataAlamat = $alamat->map(function ($alamat) {
+        $dataAsisten = $asisten->map(function ($asisten) {
             return [
-                'id_alamat' => $alamat->id,
-                'nama_alamat' => $alamat->nama_alamat,
-                'provinsi' => $alamat->provinsi,
-                'kota' => $alamat->kota,
-                'kecamatan' => $alamat->kecamatan,
-                'kode_pos' => $alamat->kode_pos,
-                'alamat_lengkap' => $alamat->alamat_lengkap,
+                'id_asisten' => $asisten->id,
+                'nama_asisten' => $asisten->nama_asisten,
+                'layanan' => $asisten->layanan,
+                'jenis_kelamin' => $asisten->jenis_kelamin,
+                'ketersediaan' => $asisten->ketersediaan,
             ];
         });
 
-        return response()->json($dataAlamat, 200);
+        return response()->json($dataAsisten, 200);
     }
 
     /**
@@ -72,7 +66,7 @@ class AsistenController extends Controller
             $alamat = Asisten::findOrFail($id);
             return response()->json($alamat);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Alamat tidak ditemukan'], 404);
+            return response()->json(['message' => 'Asisten tidak ditemukan'], 404);
         }
     }
 
@@ -85,34 +79,30 @@ class AsistenController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $alamat = Asisten::find($id);
+        $asisten = Asisten::find($id);
 
-        if (!$alamat) {
+        if (!$asisten) {
             return response()->json(['message' => 'Data alamat tidak ditemukan'] . 404);
         }
 
         $validator = Validator::make($request->all(), [
-            'nama_alamat' => 'required',
-            'provinsi' => 'required',
-            'kota' => 'required',
-            'kecamatan' => 'required',
-            'kode_pos' => 'required',
-            'alamat_lengkap' => 'required',
+            'nama_asisten' => 'required',
+            'layanan' => 'required',
+            'jenis_kelamin' => 'required',
+            'ketersediaan' => 'required',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 400);
         }
 
-        $alamat->nama_alamat = $request->input('nama_alamat');
-        $alamat->provinsi = $request->input('provinsi');
-        $alamat->kota = $request->input('kota');
-        $alamat->kecamatan = $request->input('kecamatan');
-        $alamat->kode_pos = $request->input('kode_pos');
-        $alamat->alamat_lengkap = $request->input('alamat_lengkap');
-        $alamat->save();
+        $asisten->nama_asisten = $request->input('nama_asisten');
+        $asisten->layanan = $request->input('layanan');
+        $asisten->jenis_kelamin = $request->input('jenis_kelamin');
+        $asisten->ketersediaan = $request->input('ketersediaan');
+        $asisten->save();
 
-        return response()->json(['message' => 'Data alamat berhasil diperbarui'], 200);
+        return response()->json(['message' => 'Data asisten berhasil diperbarui'], 200);
     }
 
     /**
@@ -126,11 +116,11 @@ class AsistenController extends Controller
         $alamat = Asisten::find($id);
 
         if (!$alamat) {
-            return response()->json(['message' => 'Data roti tidak ditemukan'], 404);
+            return response()->json(['message' => 'Data asisten tidak ditemukan'], 404);
         }
 
         $alamat->delete();
 
-        return response()->json(['message' => 'Data roti berhasil dihapus'], 200);
+        return response()->json(['message' => 'Data asisten berhasil dihapus'], 200);
     }
 }

@@ -12,8 +12,8 @@ class Asisten extends Model
     protected $fillable = ['nama_asisten', 'layanan', 'jenis_kelamin', 'ketersediaan'];
     protected $table = 'asistens';
 
-    // public function Asisten()
-    // {
-    //     return $this->hasMany(Asisten::class, 'nama_asisten', 'layanan', 'jenis_kelamin', 'ketersediaan');
-    // }
+    public function Asisten()
+    {
+        return $this->hasMany(Asisten::class, 'nama_asisten', 'layanan', 'jenis_kelamin', 'ketersediaan');
+    }
 }

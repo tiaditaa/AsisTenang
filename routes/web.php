@@ -49,4 +49,15 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
         ->group(function () {
             Route::match(['get','post'],'tambah', 'store')->name('add');
         });
+
+    Route::controller(AsistenController::class)
+        ->prefix('asisten')
+        ->as('asisten.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('showdata', 'dataTable')->name('dataTable');
+            Route::match(['get','post'],'tambah', 'tambahAsisten')->name('add');
+            Route::match(['get','post'],'{id}/ubah', 'ubahAkun')->name('edit');
+            Route::delete('{id}/hapus', 'hapusAkun')->name('delete');
+        });
 });

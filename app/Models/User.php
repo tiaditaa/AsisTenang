@@ -17,7 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    // protected $table = 'users';
+    protected $table = 'users';
     protected $fillable = [
         'name',
         'email',
@@ -44,13 +44,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // public function Alamat()
-    // {
-    //     $this->hasMany(Alamat::class, 'nama_alamat', 'provinsi', 'kota', 'kecamatan', 'kode_pos', 'alamat_lengkap');
-    // }
+    public function Alamat()
+    {
+        $this->hasMany(Alamat::class, 'nama_alamat', 'provinsi', 'kota', 'kecamatan', 'kode_pos', 'alamat_lengkap');
+    }
 
-    // public function Asisten()
-    // {
-    //     return $this->hasMany(Asisten::class, 'nama_asisten', 'layanan', 'jenis_kelamin', 'ketersediaan');
-    // }
+    public function Asisten()
+    {
+        return $this->hasMany(Asisten::class, 'nama_asisten', 'layanan', 'jenis_kelamin', 'ketersediaan');
+    }
 }
