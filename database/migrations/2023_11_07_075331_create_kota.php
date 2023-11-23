@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('kota', function (Blueprint $table) {
             $table->id();
             $table->string('nama_kota');
-            
+            $table->unsignedBigInteger('id_provinsi');
+            $table->foreign('id_provinsi')->references('id')->on('provinsi');
             $table->timestamps();
         });
     }

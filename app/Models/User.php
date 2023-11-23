@@ -17,13 +17,14 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $table = 'users';
     protected $fillable = [
         'name',
         'email',
         'password',
         'user_image'
     ];
+
+    protected $table = 'users';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,13 +45,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function Alamat()
-    {
-        $this->hasMany(Alamat::class, 'nama_alamat', 'provinsi', 'kota', 'kecamatan', 'kode_pos', 'alamat_lengkap');
-    }
-
-    public function Asisten()
-    {
-        return $this->hasMany(Asisten::class, 'nama_asisten', 'layanan', 'jenis_kelamin', 'ketersediaan');
+    public function Alamat() {
+        return $this->hasMany(Alamat:class);
     }
 }

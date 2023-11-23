@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Validator;
 
 class AlamatController extends Controller
 {
+
+    public function index()
+    {
+        $provinsiList = Alamat::distinct('provinsi')->pluck('provinsi', 'provinsi');
+
+        return view('page.admin.pelanggan.addAlamat', compact('provinsiList'));
+    }
     /**
      * Store a newly created resource in storage.
      *
