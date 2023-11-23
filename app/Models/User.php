@@ -46,6 +46,6 @@ class User extends Authenticatable
     ];
 
     public function Alamat() {
-        return $this->hasMany(Alamat:class);
+        return $this->hasMany(Alamat::class);
     }
 }
