@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_kecamatan');
             $table->foreign('id_kecamatan')->references('id')->on('kecamatan');
             $table->string('nama_alamat');
-            $table->smallInteger('kode_pos');
+            $table->integer('kode_pos');
             $table->string('alamat_lengkap');
             $table->timestamps();
         });

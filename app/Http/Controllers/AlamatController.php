@@ -1,21 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use app\Models\Alamat;
+use App\Models\Kota;
+use App\Models\Alamat;
+use App\Models\Provinsi;
+use App\Models\Kecamatan;
 use Illuminate\Http\Request;
-use app\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AlamatController extends Controller
 {
-
-    public function index()
-    {
-        $provinsiList = Alamat::distinct('provinsi')->pluck('provinsi', 'provinsi');
-
-        return view('page.admin.pelanggan.addAlamat', compact('provinsiList'));
-    }
     /**
      * Store a newly created resource in storage.
      *
@@ -24,120 +21,50 @@ class AlamatController extends Controller
      */
     public function store(Request $request)
     {
+        $userId = Auth::id();
+        if ($request->isMethod('post')) {
+            Alamat::create([
+                'id_penyewa' => $userId,
+                'nama_alamat' => $request->nama_alamat,
+                'id_provinsi' => $request->id_provinsi,
+                'id_kota' => $request->id_kota,
+                'id_kecamatan' => $request->id_kecamatan,
+                'kode_pos' => 5,
+                'alamat_lengkap' => $request->alamat_lengkap,
+            ]);
+            return redirect()->route('alamat.add')->with('status', 'Data telah tersimpan di database');
+        }
+        $provinsiList = Provinsi::all();
+        $kotaList = Kota::all();
+        $kecList = Kecamatan::all();
+        return view('page.admin.pelanggan.addAlamat', compact('provinsiList', 'kotaList', 'kecList'));
+    }
+
+    public function ubahAkun($id, Request $request)
+    {
+        $alamat = Alamat::findOrFail($id);
         if ($request->isMethod('post')) {
 
             $this->validate($request, [
-                'nama_alamat' => 'required',
-                'provinsi' => 'required',
-                'kota' => 'required',
-                'kecamatan' => 'required',
-                'kode_pos' => 'required',
-                'alamat_lengkap' => 'required',
+                'id_provinsi' => 'required',
+                'id_kota' => 'required',
+                'id_kecamatan' => 'required',
+                'nama_alamat' => 'required|string',
+                'kode_pos' => 'required'
             ]);
 
-            Alamat::create([
+            $alamat->update([
+                'id_provinsi' => $request->id_provinsi,
+                'id_kota' => $request->id_kota,
+                'id_kecamatan' => $request->id_kecamatan,
                 'nama_alamat' => $request->nama_alamat,
-                'provinsi' => $request->provinsi,
-                'kota' => $request->kota,
-                'kecamatan' => $request->kecamatan,
-                'kode_pos' => $request->kode_pos,
-                'alamat_lengkap' => $request->alamat_lengkap,
+                'kode_pos' => $request->kode_pos
             ]);
-            return redirect()->route('akun.add')->with('status', 'Data telah tersimpan di database');
+            return redirect()->route('akun.edit',['id' => $alamat->id ])->with('status', 'Data telah tersimpan di database');
         }
-        return view('page.admin.pelanggan.addAlamat');
-    }
-
-    public function getData()
-    {
-        $alamat = Alamat::all();
-
-        $dataAlamat = $alamat->map(function ($alamat) {
-            return [
-                'id_alamat' => $alamat->id,
-                'nama_alamat' => $alamat->nama_alamat,
-                'provinsi' => $alamat->provinsi,
-                'kota' => $alamat->kota,
-                'kecamatan' => $alamat->kecamatan,
-                'kode_pos' => $alamat->kode_pos,
-                'alamat_lengkap' => $alamat->alamat_lengkap,
-            ];
-        });
-
-        return response()->json($dataAlamat, 200);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        try {
-            $alamat = Alamat::findOrFail($id);
-            return response()->json($alamat);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Alamat tidak ditemukan'], 404);
-        }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $alamat = Alamat::find($id);
-
-        if (!$alamat) {
-            return response()->json(['message' => 'Data alamat tidak ditemukan'] . 404);
-        }
-
-        $validator = Validator::make($request->all(), [
-            'nama_alamat' => 'required',
-            'provinsi' => 'required',
-            'kota' => 'required',
-            'kecamatan' => 'required',
-            'kode_pos' => 'required',
-            'alamat_lengkap' => 'required',
+        return view('page.admin.akun.ubahAkun', [
+            'alamat' => $alamat
         ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 400);
-        }
-
-        $alamat->nama_alamat = $request->input('nama_alamat');
-        $alamat->provinsi = $request->input('provinsi');
-        $alamat->kota = $request->input('kota');
-        $alamat->kecamatan = $request->input('kecamatan');
-        $alamat->kode_pos = $request->input('kode_pos');
-        $alamat->alamat_lengkap = $request->input('alamat_lengkap');
-        $alamat->save();
-
-        return response()->json(['message' => 'Data alamat berhasil diperbarui'], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete($id)
-    {
-        $alamat = Alamat::find($id);
-
-        if (!$alamat) {
-            return response()->json(['message' => 'Data roti tidak ditemukan'], 404);
-        }
-
-        $alamat->delete();
-
-        return response()->json(['message' => 'Data roti berhasil dihapus'], 200);
-    }
 }

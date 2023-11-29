@@ -9,7 +9,7 @@ class Alamat extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama_alamat', 'provinsi', 'kota', 'kecamatan', 'kode_pos', 'alamat_lengkap'];
+    protected $fillable = ['nama_alamat', 'id_penyewa', 'id_provinsi', 'id_kota', 'id_kecamatan', 'kode_pos', 'alamat_lengkap'];
     protected $table = 'alamat';
 
     public function provinsi() {
