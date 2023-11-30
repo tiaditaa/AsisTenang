@@ -83,8 +83,8 @@
                         <div class="form-group">
                             <label for="inputKetersediaan">Ketersediaan</label>
                             <select class="form-control" name="ketersediaan">
-                                <option value="Tersedia">Tersedia</option>
-                                <option value="Tidak Tersedia">Tidak Tersedia</option>
+                                <option value="1">Tersedia</option>
+                                <option value="0">Tidak Tersedia</option>
                             </select>
                         </div>
                     </div>

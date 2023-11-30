@@ -10,7 +10,7 @@ class AsistenController extends Controller
 {
     public function index()
     {
-        return view('admin.asisten.index');
+        return view('page.admin.asisten.index');
     }
 
     public function dataTable()
@@ -36,11 +36,9 @@ class AsistenController extends Controller
             ]);
 
             Asisten::create($request->all());
-
-            return response()->json(['success' => true]);
         }
 
-        return view('admin.asisten.add');
+        return view('page.admin.asisten.addAsisten');
     }
 
     public function ubahAsisten(Request $request, $id)
@@ -55,20 +53,16 @@ class AsistenController extends Controller
 
             $asisten = Asisten::findOrFail($id);
             $asisten->update($request->all());
-
-            return response()->json(['success' => true]);
         }
 
         $asisten = Asisten::findOrFail($id);
 
-        return view('admin.asisten.ubahAsisten', compact('asisten'));
+        return view('page.admin.asisten.ubahAsisten', compact('asisten'));
     }
 
     public function deleteAsisten($id)
     {
         $asisten = Asisten::findOrFail($id);
         $asisten->delete();
-
-        return response()->json(['success' => true]);
     }
 }
