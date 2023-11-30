@@ -40,7 +40,7 @@ class AsistenController extends Controller
             return response()->json(['success' => true]);
         }
 
-        return view('admin.asisten.addAsisten');
+        return view('admin.asisten.add');
     }
 
     public function ubahAsisten(Request $request, $id)
