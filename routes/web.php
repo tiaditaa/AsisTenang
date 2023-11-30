@@ -31,17 +31,30 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
         Route::post('update', [HomeController::class, 'updateprofile'])->name('profile.update');
     });
 
+    // Akun Controller Routes
     Route::controller(AkunController::class)
         ->prefix('akun')
         ->as('akun.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('showdata', 'dataTable')->name('dataTable');
-            Route::match(['get','post'],'tambah', 'tambahAkun')->name('add');
-            Route::match(['get','post'],'{id}/ubah', 'ubahAkun')->name('edit');
+            Route::match(['get', 'post'], 'tambah', 'tambahAkun')->name('add');
+            Route::match(['get', 'post'], '{id}/ubah', 'ubahAkun')->name('edit');
             Route::delete('{id}/hapus', 'hapusAkun')->name('delete');
         });
 
+    // Asisten Controller Routes
+    Route::prefix('asisten')
+    ->as('asisten.')
+    ->group(function () {
+        Route::get('/', [AsistenController::class, 'index'])->name('index');
+        Route::get('data-table', [AsistenController::class, 'dataTable'])->name('dataTable');
+        Route::match(['get', 'post'], 'tambah', [AsistenController::class, 'addAsisten'])->name('add');
+        Route::put('update/{id}', [AsistenController::class, 'ubahAsisten'])->name('update');
+        Route::delete('delete/{id}', [AsistenController::class, 'deleteAsisten'])->name('delete');
+    });
+
+    // Alamat Controller Routes
     Route::controller(AlamatController::class)
         ->prefix('alamat')
         ->as('alamat.')
