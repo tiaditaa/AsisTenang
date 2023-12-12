@@ -48,7 +48,7 @@ $links = [
             [
                 "section_text" => "Data Asisten",
                 "section_icon" => "far fa-circle",
-                "section_href" => route('asisten.index')
+                "section_href" => route('asisten.getAsisten')
             ],
             [
                 "section_text" => "Tambah Asisten",

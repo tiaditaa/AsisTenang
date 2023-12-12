@@ -4,29 +4,56 @@ namespace App\Http\Controllers;
 
 use App\Models\Asisten;
 use Illuminate\Http\Request;
-use DataTables;
+use Yajra\DataTables\DataTables;
+use App\Http\Controllers\Controller;
 
 class AsistenController extends Controller
 {
-    public function index()
+    public function show()
     {
-        return view('page.admin.asisten.index');
+        return view('page.admin.asisten.show');
     }
 
-    public function dataTable()
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
-        $asistens = Asisten::select(['id', 'nama_asisten', 'layanan', 'jenis_kelamin', 'ketersediaan']);
-
-        return Asisten::of($asistens)
-            ->addColumn('action', function ($asisten) {
-                return '<a href="#" class="btn btn-sm btn-primary edit" data-id="' . $asisten->id . '">Edit</a>
-                        <a href="#" class="btn btn-sm btn-danger delete" data-id="' . $asisten->id . '">Delete</a>';
-            })
-            ->make(true);
+        if ($request->isMethod('post')) {
+            Asisten::create([
+                'nama_asisten' => $request->nama_asisten,
+                'layanan' => $request->layanan,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'ketersediaan' => $request->ketersediaan
+            ]);
+            return redirect()->route('asisten.add')->with('status', 'Data telah tersimpan di database');
+        }
+        return view('page.admin.asisten.addAsisten');
     }
 
-    public function addAsisten(Request $request)
+    public function getAsisten(Request $request)
     {
+        if ($request->ajax() && $request->isMethod('post')) {
+            $asisten = Asisten::select(['id','nama_asisten','layanan','jenis_kelamin','ketersediaan'])->get();
+
+            return DataTables::of($asisten)
+                // ->addColumn('action', function ($asisten) {
+                //     // $url = route('alamat.edit', ['id' => $alamat->id]);
+                //     $urlHapus = route('asisten.delete', $asisten->id);
+                //     return '<a href="' . $urlHapus . '" class="btn btn-danger">Hapus</a>';
+                // })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return redirect()->route('asisten.getAsisten');
+    }
+
+    public function ubahAsisten(Request $request, $id)
+    {
+        $asisten = Asisten::findOrFail($id);
         if ($request->isMethod('post')) {
             $this->validate($request, [
                 'nama_asisten' => 'required',
@@ -35,34 +62,26 @@ class AsistenController extends Controller
                 'ketersediaan' => 'required',
             ]);
 
-            Asisten::create($request->all());
-        }
-
-        return view('page.admin.asisten.addAsisten');
-    }
-
-    public function ubahAsisten(Request $request, $id)
-    {
-        if ($request->isMethod('put')) {
-            $this->validate($request, [
-                'nama_asisten' => 'required',
-                'layanan' => 'required',
-                'jenis_kelamin' => 'required',
-                'ketersediaan' => 'required',
+            $asisten->update([
+                'nama_asisten' => $request->nama_asisten,
+                'layanan' => $request->layanan,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'ketersediaan' => $request->ketersediaan
             ]);
 
-            $asisten = Asisten::findOrFail($id);
-            $asisten->update($request->all());
+            return redirect()->route('asisten.edit',['id' => $asisten->id ])->with('status', 'Data telah tersimpan di database');
         }
 
-        $asisten = Asisten::findOrFail($id);
-
-        return view('page.admin.asisten.ubahAsisten', compact('asisten'));
+        return view('page.admin.asisten.ubahAsisten', ['asisten' => $asisten]);
     }
 
-    public function deleteAsisten($id)
+    public function hapusAsisten($id)
     {
         $asisten = Asisten::findOrFail($id);
-        $asisten->delete();
+        $asisten->delete($id);
+
+        return response()->json([
+            'msg' => 'Data yang dipilih telah dihapus'
+        ]);
     }
 }
