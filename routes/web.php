@@ -39,8 +39,8 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('showdata', 'dataTable')->name('dataTable');
-            Route::match(['get', 'post'], 'tambah', 'tambahAkun')->name('add');
-            Route::match(['get', 'post'], '{id}/ubah', 'ubahAkun')->name('edit');
+            Route::match(['get','post'],'tambah', 'tambahAkun')->name('add');
+            Route::match(['get','post'],'{id}/ubah', 'ubahAkun')->name('edit');
             Route::delete('{id}/hapus', 'hapusAkun')->name('delete');
         });
 
@@ -60,6 +60,10 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
         ->prefix('alamat')
         ->as('alamat.')
         ->group(function () {
+            Route::get('show', [AlamatController::class, 'show'])->name('getAlamat');
+            Route::post('show', [AlamatController::class, 'getAlamat']);
+            Route::delete('hapus/{id}', [AlamatController::class, 'hapusAlamat'])->name('delete');
             Route::match(['get', 'post'], 'tambah', 'store')->name('add');
-        });
+            Route::match(['get', 'post'], 'ubah/{id}', 'ubahAlamat')->name('edit');
+    });
 });

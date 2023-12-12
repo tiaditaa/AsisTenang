@@ -2,7 +2,7 @@
 <div class="login-box">
     <div class="login-logo">
         <a href="#">
-            <b>Asis</b>Tenang</a>
+            <b>Admin</b>LTE</a>
     </div>
     <!-- /.login-logo -->
     <div class="card">

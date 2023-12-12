@@ -2,7 +2,7 @@
 <div class="register-box">
     <div class="register-logo">
         <a href="#">
-            <b>Asis</b>Tenang</a>
+            <b>Admin</b>LTE</a>
     </div>
 
     <div class="card">
@@ -95,12 +95,6 @@
                 </div>
                 <div class="row">
                     <div class="col-8">
-                        {{-- <div class="icheck-primary">
-                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                <label for="agreeTerms">
-                 I agree to the <a href="#">terms</a>
-                </label>
-              </div> --}}
                Sudah punya akun? <a href="{{ route('login') }}" class="text-center">Login</a>
                     </div>
                     <!-- /.col -->
