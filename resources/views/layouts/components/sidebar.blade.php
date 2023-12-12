@@ -31,7 +31,7 @@ $links = [
             [
                 "section_text" => "Data Alamat",
                 "section_icon" => "far fa-circle",
-                "section_href" => route('akun.index')
+                "section_href" => route('alamat.getAlamat')
             ],
             [
                 "section_text" => "Tambah Alamat",
@@ -41,23 +41,22 @@ $links = [
         ]
     ],
     [
-    "text" => "Kelola Asisten",
-    "icon" => "fas fa-users",
-    "is_multi" => true,
-    "href" => [
-        [
-            "section_text" => "Data Asisten",
-            "section_icon" => "far fa-circle",
-            "section_href" => route('asisten.index')
-        ],
-        [
-            "section_text" => "Tambah Asisten",
-            "section_icon" => "far fa-circle",
-            "section_href" => route('asisten.add')
+        "text" => "Kelola Asisten",
+        "icon" => "fas fa-users",
+        "is_multi" => true,
+        "href" => [
+            [
+                "section_text" => "Data Asisten",
+                "section_icon" => "far fa-circle",
+                "section_href" => route('asisten.index')
+            ],
+            [
+                "section_text" => "Tambah Asisten",
+                "section_icon" => "far fa-circle",
+                "section_href" => route('asisten.add')
+            ]
         ]
     ]
-]
-
 ];
 $navigation_links = json_decode(json_encode($links));
 @endphp

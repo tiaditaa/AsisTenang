@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Route;
 
 class AkunController extends Controller
 {
@@ -117,6 +118,7 @@ class AkunController extends Controller
         }
         return view('page.admin.akun.addAkun');
     }
+    
 
     public function ubahAkun($id, Request $request)
     {
