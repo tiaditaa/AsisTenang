@@ -48,12 +48,14 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
     Route::prefix('asisten')
     ->as('asisten.')
     ->group(function () {
-        Route::get('/', [AsistenController::class, 'index'])->name('index');
-        Route::get('data-table', [AsistenController::class, 'dataTable'])->name('dataTable');
-        Route::match(['get', 'post'], 'tambah', [AsistenController::class, 'addAsisten'])->name('add');
-        Route::put('update/{id}', [AsistenController::class, 'ubahAsisten'])->name('update');
-        Route::delete('delete/{id}', [AsistenController::class, 'deleteAsisten'])->name('delete');
-        Route::get('downloadpdf', [AsistenController::class, 'downloadPDF'])->name('downloadPdf');
+            Route::get('show', [AsistenController::class, 'show'])->name('getAsisten');
+            Route::post('show', [AsistenController::class, 'getAsisten']);
+            Route::get('pilih', [AsistenController::class, 'pilih'])->name('pilihAsisten');
+            Route::post('pilih', [AsistenController::class, 'getAsisten']);
+            Route::match(['get', 'post'], 'tambah', [AsistenController::class, 'store'])->name('add');
+            Route::match(['get','post'], 'ubah/{id}', 'ubahAsisten')->name('edit');
+            Route::delete('hapus/{id}', [AsistenController::class, 'hapusAsisten'])->name('delete');
+            Route::get('downloadpdf', [AsistenController::class, 'downloadPDF'])->name('downloadPdf');
     });
 
     // Alamat Controller Routes
