@@ -78,35 +78,6 @@ class AlamatController extends Controller
         }
     }
 
-    // public function ubahAlamat($id, Request $request)
-    // {
-    //     $alamat = Alamat::findOrFail($id);
-    //     if ($request->isMethod('post')) {
-
-    //         $this->validate($request, [
-    //             'id_provinsi' => 'required',
-    //             'id_kota' => 'required',
-    //             'id_kecamatan' => 'required',
-    //             'nama_alamat' => 'required|string',
-    //             'kode_pos' => 'required',
-    //             'alamat_lengkap' => 'required'
-    //         ]);
-
-    //         $alamat->update([
-    //             'id_provinsi' => $request->id_provinsi,
-    //             'id_kota' => $request->id_kota,
-    //             'id_kecamatan' => $request->id_kecamatan,
-    //             'nama_alamat' => $request->nama_alamat,
-    //             'kode_pos' => $request->kode_pos,
-    //             'alamat_lengkap' => $request->alamat_lengkap
-    //         ]);
-    //         return redirect()->route('alamat.edit',['id' => $alamat->id ])->with('status', 'Data telah tersimpan di database');
-    //     }
-    //     $provinsiList = Provinsi::all();
-    //     $kotaList = Kota::all();
-    //     $kecList = Kecamatan::all();
-    //     return view('page.admin.pelanggan.ubahAlamat', ['alamat' => $alamat], compact('provinsiList', 'kotaList', 'kecList'));
-    // }
     public function ubahAlamat($id, Request $request)
     {
         try {
