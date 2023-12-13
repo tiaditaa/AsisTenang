@@ -38,7 +38,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <a href="{{ route('asisten.edit', $asisten->id) }}" class="btn btn-primary">Pilih Asisten</a>
+                            <a href="{{ route('asisten.downloadPdf', $asisten->id) }}" class="btn btn-primary">Pilih Asisten</a>
                             {{-- <button class="btn btn-danger hapusAsisten" data-id="{{ $asisten->id }}">Hapus</button> --}}
                         </div>
                         <!-- /.card-footer -->
