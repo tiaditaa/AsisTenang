@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Exports\AlamatExport;
 use App\Models\Kota;
 use App\Models\Alamat;
 use App\Models\Provinsi;
@@ -12,14 +14,19 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Validator;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
 class AlamatController extends Controller
 {
     public function show()
     {
-        return view('page.admin.pelanggan.show');
+        $show = Alamat::all();
+        return view('page.admin.pelanggan.show', ['page.admin.pelanggan.show'=>$show]);
+    }
+
+    public function exportExcel() {
+        return Excel::download(new AlamatExport, 'alamat.xlsx');
     }
     /**
      * Store a newly created resource in storage.
