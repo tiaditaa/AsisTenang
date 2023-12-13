@@ -54,6 +54,11 @@ $links = [
                 "section_text" => "Tambah Asisten",
                 "section_icon" => "far fa-circle",
                 "section_href" => route('asisten.add')
+            ],
+            [
+                "section_text" => "Pilih Asisten",
+                "section_icon" => "fas fa-users",
+                "section_href" => route('asisten.pilihAsisten')
             ]
         ]
     ]

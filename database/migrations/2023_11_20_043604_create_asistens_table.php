@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nama_asisten');
             $table->string('layanan');
             $table->string('jenis_kelamin');
-            $table->boolean('ketersediaan');
+            $table->string('ketersediaan');
             $table->timestamps();
         });
     }

@@ -51,6 +51,8 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
         ->group(function () {
             Route::get('show', [AsistenController::class, 'show'])->name('getAsisten');
             Route::post('show', [AsistenController::class, 'getAsisten']);
+            Route::get('pilih', [AsistenController::class, 'pilih'])->name('pilihAsisten');
+            Route::post('pilih', [AsistenController::class, 'getAsisten']);
             Route::match(['get', 'post'], 'tambah', [AsistenController::class, 'store'])->name('add');
             Route::match(['get','post'], 'ubah/{id}', 'ubahAsisten')->name('edit');
             Route::delete('hapus/{id}', [AsistenController::class, 'hapusAsisten'])->name('delete');
