@@ -14,6 +14,33 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            ProvinsiTableData::class,
+            KotaTableData::class,
+            KecTableData::class,
+            AlamatTableData::class
+
+        ]);
     }
+
+    // public function jalan()
+    // {
+    //     $this->call([
+    //         ProvinsiTableData::class
+    //     ]);
+    // }
+
+//     public function jalans()
+//     {
+//         $this->call([
+//             KotaTableData::class
+//         ]);
+//     }
+
+//     public function jalanss()
+//     {
+//         $this->call([
+//             KecTableData::class
+//         ]);
+//     }
 }
