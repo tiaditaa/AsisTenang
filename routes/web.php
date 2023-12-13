@@ -45,14 +45,15 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
         });
 
     // Asisten Controller Routes
-    Route::prefix('asisten')
-    ->as('asisten.')
-    ->group(function () {
-        Route::get('show', [AsistenController::class, 'show'])->name('getAsisten');
-        Route::post('show', [AsistenController::class, 'getAsisten']);
-        Route::match(['get', 'post'], 'tambah', [AsistenController::class, 'store'])->name('add');
-        Route::match(['get','post'], 'ubah/{id}', [AsistenController::class, 'ubahAsisten'])->name('edit');
-        Route::delete('hapus/{id}', [AsistenController::class, 'hapusAsisten'])->name('delete');
+    Route::controller(AsistenController::class)
+        ->prefix('asisten')
+        ->as('asisten.')
+        ->group(function () {
+            Route::get('show', [AsistenController::class, 'show'])->name('getAsisten');
+            Route::post('show', [AsistenController::class, 'getAsisten']);
+            Route::match(['get', 'post'], 'tambah', [AsistenController::class, 'store'])->name('add');
+            Route::match(['get','post'], 'ubah/{id}', 'ubahAsisten')->name('edit');
+            Route::delete('hapus/{id}', [AsistenController::class, 'hapusAsisten'])->name('delete');
     });
 
     // Alamat Controller Routes

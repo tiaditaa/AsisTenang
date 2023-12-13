@@ -108,10 +108,13 @@
                             "data": "id",
                             "name": "id",
                             render: function (data, type, full, meta) {
-                            return '<a href="#" class="editAsisten" data-id="' + data + '"><i class="fas fa-edit fa-lg"></i></a> ' +
+                            var routeUrl = '{{ route("asisten.edit", ":id") }}';
+                            routeUrl = routeUrl.replace(':id', data);
+                            return '<a href="' + routeUrl + '" class="editAsisten" data-id="' + data + '"><i class="fas fa-edit fa-lg"></i></a> ' +
                                    '<a href="#" class="hapusAsisten" data-id="' + data + '"><i class="fas fa-trash fa-lg text-danger"></i></a>';
                         }
                         }
+                        
                     ],
                     "language": {
                         "decimal": "",

@@ -1,4 +1,4 @@
-@extends('layouts.base_admin.base_dashboard') @section('judul', 'Tambah Asisten')
+@extends('layouts.base_admin.base_dashboard') @section('judul', 'Ubah Asisten')
 
 @section('content')
 <!-- Content Header (Page header) -->
@@ -30,9 +30,9 @@
         {{ session('status') }}
     </div>
     @endif
-    <form method="post" action="{{ route('asisten.update', ['id' => $asisten->id]) }}" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
         @csrf
-        @method('put')
+        {{-- @method('put') --}}
         <div class="row">
             <div class="col-md-6">
                 <div class="card card-primary">
@@ -84,8 +84,8 @@
                         <div class="form-group">
                             <label for="inputKetersediaan">Ketersediaan</label>
                             <select class="form-control" name="ketersediaan">
-                                <option value="Tersedia" {{ $asisten->ketersediaan === 'Tersedia' ? 'selected' : '' }}>Tersedia</option>
-                                <option value="Tidak Tersedia" {{ $asisten->ketersediaan === 'Tidak Tersedia' ? 'selected' : '' }}>Tidak Tersedia</option>
+                                <option value="1" {{ $asisten->ketersediaan === 'Tersedia' ? 'selected' : '' }}>Tersedia</option>
+                                <option value="0" {{ $asisten->ketersediaan === 'Tidak Tersedia' ? 'selected' : '' }}>Tidak Tersedia</option>
                             </select>
                         </div>
                     </div>
