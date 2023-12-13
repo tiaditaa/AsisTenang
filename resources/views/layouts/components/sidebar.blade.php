@@ -59,6 +59,11 @@ $links = [
                 "section_text" => "Pilih Asisten",
                 "section_icon" => "fas fa-users",
                 "section_href" => route('asisten.pilihAsisten')
+],
+            [
+                "section_text" => "Kontrak",
+                "section_icon" => "fas fa-users",
+                "section_href" => route('asisten.downloadPdf')
             ]
         ]
     ]

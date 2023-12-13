@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Asisten;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use App\Http\Controllers\Controller;
+use App\Models\Alamat;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Validation\ValidationException;
+use Barryvdh\DomPDF\PDF;
 
 class AsistenController extends Controller
 {
@@ -120,5 +124,37 @@ class AsistenController extends Controller
 
         return view('page.admin.pilihAsisten.pilihAsisten', compact('dataAsisten'));
     }
+
+    public function downloadPDF()
+    {
+        $user = Auth::id();
+        $dataAlamat = Alamat::where('id', 1)->get();
+        $dataAsisten = Asisten::find($user);
+
+        $data = [
+            'dataUser' => $user,
+            'dataAlamat' => $dataAlamat, // This assumes that the 'alamat' relationship returns a collection
+            'dataAsisten' => $dataAsisten,
+        ];
+
+        // Create an instance of the PDF class
+        $pdf = app('dompdf.wrapper');
+
+        // Set options for this specific PDF instance
+        $pdf->setOptions([
+            'dpi' => 150,
+            'defaultFont' => 'Roboto'
+        ]);
+
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'portrait'); // Adjust 'A4' and 'portrait' based on your requirements
+
+        // Load the view
+        $pdf->loadView('kontrak', $data);
+
+        // Download the PDF
+        return $pdf->stream('kontrak.pdf', array('Attachment' => false));
+    }
+
 
 }

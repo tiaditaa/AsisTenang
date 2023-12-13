@@ -53,6 +53,7 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
         Route::match(['get', 'post'], 'tambah', [AsistenController::class, 'addAsisten'])->name('add');
         Route::put('update/{id}', [AsistenController::class, 'ubahAsisten'])->name('update');
         Route::delete('delete/{id}', [AsistenController::class, 'deleteAsisten'])->name('delete');
+        Route::get('downloadpdf', [AsistenController::class, 'downloadPDF'])->name('downloadPdf');
     });
 
     // Alamat Controller Routes

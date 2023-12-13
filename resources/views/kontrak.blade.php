@@ -11,8 +11,8 @@
     <link id="theme-style" rel="stylesheet" href="{{ asset('output/assets/css/orbit-2.css') }}">
     <style>
         body, html {
-            margin: 0;
-            padding: 0;
+            margin: 20;
+            padding: 10;
         }
 
         /* Tambahkan gaya CSS berikut untuk memberikan garis bawah pada judul section */
@@ -24,7 +24,7 @@
         }
         .main-wrapper {
             background: #fff;
-            /* padding: 80px; */
+            padding: 80px;
             padding-right: 90px;
             min-height: 100vh;
         }
@@ -47,15 +47,13 @@
 
         <div class="parties">
             <div class="party">
-                <strong>Penyewa:</strong>
-                <p>Nama Penyewa</p>
-                <p>Alamat Penyewa</p>
+                <p><strong>Penyewa:</strong>  Hafidzon</p>
+                <p><strong>Alamat:</strong> 5802 Florine Keys Suite 259 West Audreytown, PA 38905</p>
             </div>
 
             <div class="party">
-                <strong>Asisten Rumah Tangga:</strong>
-                <p>Nama Asisten Rumah Tangga</p>
-                <p>Alamat Asisten Rumah Tangga</p>
+                <p><strong>Asisten Rumah Tangga:</strong>  Lala </p>
+                <p><strong>Layanan:</strong>  Pembersihan</p>
             </div>
         </div>
 
@@ -68,28 +66,25 @@
         </ul>
 
         <h3>2. Gaji dan Tunjangan</h3>
-        <p>Penyewa akan membayar gaji kepada Asisten Rumah Tangga sebesar [jumlah] setiap [periode pembayaran].</p>
+        <p>Penyewa akan membayar gaji kepada Asisten Rumah Tangga sebesar 480.000 setiap minggu.</p>
         <p>Asisten Rumah Tangga berhak atas tunjangan kesehatan dan cuti sesuai dengan ketentuan yang berlaku.</p>
 
         <h3>3. Waktu Kerja</h3>
-        <p>Asisten Rumah Tangga akan bekerja selama [jumlah] jam per hari, [hari kerja] hari per minggu, dimulai dari pukul [jam mulai] hingga pukul [jam selesai].</p>
+        <p>Asisten Rumah Tangga akan bekerja selama 8 jam per hari, 6 hari per minggu, dimulai dari pukul 06.00 hingga pukul 14.00.</p>
 
-        <h3>4. Periode Kontrak</h3>
-        <p>Kontrak ini berlaku mulai tanggal [tanggal mulai] dan berakhir pada tanggal [tanggal berakhir].</p>
-
-        <h3>5. Kewajiban dan Hak</h3>
+        <h3>4. Kewajiban dan Hak</h3>
         <p>Penyewa dan Asisten Rumah Tangga setuju untuk saling menghormati hak dan kewajiban masing-masing sesuai dengan peraturan yang berlaku.</p>
 
         <p>Demikianlah kontrak kerja ini dibuat dengan sebenarnya oleh kedua belah pihak sebagai bentuk kesepakatan bersama.</p>
 
         <div class="signatures">
             <div class="signature">
-                <p>(Nama Penyewa)</p>
+                <p>Hafidzon</p>
                 <img src="{{ asset('signature/penyewa.png') }}" alt="Signature Penyewa">
             </div>
 
             <div class="signature">
-                <p>(Nama Asisten Rumah Tangga)</p>
+                <p>Lala</p>
                 <img src="{{ asset('signature/asisten.png') }}" alt="Signature Asisten Rumah Tangga">
             </div>
         </div>
