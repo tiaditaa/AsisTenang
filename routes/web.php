@@ -53,7 +53,7 @@ Route::group(['prefix' => 'dashboard/admin'], function () {
             Route::get('pilih', [AsistenController::class, 'pilih'])->name('pilihAsisten');
             Route::post('pilih', [AsistenController::class, 'getAsisten']);
             Route::match(['get', 'post'], 'tambah', [AsistenController::class, 'store'])->name('add');
-            Route::match(['get','post'], 'ubah/{id}', 'ubahAsisten')->name('edit');
+            Route::put('update/{id}', [AsistenController::class, 'ubahAsisten'])->name('update');
             Route::delete('hapus/{id}', [AsistenController::class, 'hapusAsisten'])->name('delete');
             Route::get('downloadpdf', [AsistenController::class, 'downloadPDF'])->name('downloadPdf');
     });
